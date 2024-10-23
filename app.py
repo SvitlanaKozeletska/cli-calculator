@@ -1,5 +1,6 @@
 import argparse
 
+
 def add(x: float, y: float) -> float:
     return x + y
 
@@ -12,15 +13,21 @@ def multiply(x: float, y: float) -> float:
     return x * y
 
 
+def divide(x: float, y: float) -> float:
+    if y == 0:
+        return 'Error: Division by zero'
+    return x / y
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='A simple CLI calculator',
-        usage='Specify the operation (\'add\', \'substract\' or \'multiply\') and the two numbers to operate on'
+        usage='Specify the operation (\'add\', \'substract\', \'multiply\' or \'divide\') and the two numbers to operate on'
         )
     
     # A positional argument that specifies the arithmetic operation.
     # It has a limited set of choices: 'add', 'substract', 'multiply'
-    parser.add_argument('operation', type=str, choices=['add', 'substract', 'multiply'], help='The operation to perform')
+    parser.add_argument('operation', type=str, choices=['add', 'substract', 'multiply', 'divide'], help='The operation to perform')
     # A positional argument for the first number. It is expected to be a float
     parser.add_argument('x', type=float, help='The first number')
     # A positional argument for the second number. It is expected to be a float
@@ -34,6 +41,8 @@ def main():
         result = substract(args.x, args.y)
     elif args.operation == 'multiply':
         result = multiply(args.x, args.y)
+    elif args.operation == 'divide':
+        result = divide(args.x, args.y)
 
     print(f'The result is: {result}')
 
