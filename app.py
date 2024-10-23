@@ -8,15 +8,19 @@ def substract(x: float, y: float) -> float:
     return x - y
 
 
+def multiply(x: float, y: float) -> float:
+    return x * y
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='A simple CLI calculator',
-        usage='Specify the operation (\'add\' or \'substract\') and the two numbers to operate on'
+        usage='Specify the operation (\'add\', \'substract\' or \'multiply\') and the two numbers to operate on'
         )
     
     # A positional argument that specifies the arithmetic operation.
-    # It has a limited set of choices: 'add', 'substract'
-    parser.add_argument('operation', type=str, choices=['add', 'substract'], help='The operation to perform')
+    # It has a limited set of choices: 'add', 'substract', 'multiply'
+    parser.add_argument('operation', type=str, choices=['add', 'substract', 'multiply'], help='The operation to perform')
     # A positional argument for the first number. It is expected to be a float
     parser.add_argument('x', type=float, help='The first number')
     # A positional argument for the second number. It is expected to be a float
@@ -28,6 +32,8 @@ def main():
         result = add(args.x, args.y)
     elif args.operation == 'substract':
         result = substract(args.x, args.y)
+    elif args.operation == 'multiply':
+        result = multiply(args.x, args.y)
 
     print(f'The result is: {result}')
 
