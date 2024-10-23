@@ -1,0 +1,35 @@
+import argparse
+
+def add(x: float, y: float) -> float:
+    return x + y
+
+
+def substract(x: float, y: float) -> float:
+    return x - y
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='A simple CLI calculator',
+        usage='Specify the operation (\'add\' or \'substract\') and the two numbers to operate on'
+        )
+    
+    # A positional argument that specifies the arithmetic operation.
+    # It has a limited set of choices: 'add', 'substract'
+    parser.add_argument('operation', type=str, choices=['add', 'substract'], help='The operation to perform')
+    # A positional argument for the first number. It is expected to be a float
+    parser.add_argument('x', type=float, help='The first number')
+    # A positional argument for the second number. It is expected to be a float
+    parser.add_argument('y', type=float, help='The second number')
+
+    args = parser.parse_args()
+
+    if args.operation == 'add':
+        result = add(args.x, args.y)
+    elif args.operation == 'substract':
+        result = substract(args.x, args.y)
+
+    print(f'The result is: {result}')
+
+if __name__ == "__main__":
+    main()
